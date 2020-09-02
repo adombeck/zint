@@ -10,7 +10,7 @@
 
 int ZBarcode_Buffer(struct zint_symbol *symbol, int rotate_angle);
 
-extern "C" int LLVMFuzzerTestOneInput(const uint8_t *Data, size_t Size)
+extern "C" int FUZZ(const uint8_t *Data, size_t Size)
 {
   if (Size < 4)
     return 0;
