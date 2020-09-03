@@ -33,6 +33,7 @@ jobs:
           pull_request_number: ${{ github.event.pull_request.number }}
           owner: ${{ github.event.repository.owner.login }}
           repository: ${{ github.event.repository.name }}
+          timeout: 60
       - id: report-coverage
         name: Report Coverage
         uses: CodeIntelligenceTesting/github-actions/report-coverage@master
