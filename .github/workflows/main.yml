@@ -20,6 +20,7 @@ jobs:
           cognito_user: ${{ secrets.COGNITO_USER }}
           cognito_password: ${{ secrets.COGNITO_PASSWORD }}
           project: ${{ env.PROJECT_NAME }}
+          git_reference: ${{ github.sha }}
           test_collection: "ean_fuzzer"          
       - id: monitor-fuzzing
         name: Monitor Fuzzing
@@ -47,5 +48,5 @@ jobs:
           pull_request_number: ${{ github.event.pull_request.number }}
           owner: ${{ github.event.repository.owner.login }}
           repository: ${{ github.event.repository.name }}
-          commit: ${{ github.sha }}
+          git_reference: ${{ github.sha }}
           
