@@ -38,7 +38,7 @@ jobs:
       - id: report-coverage
         name: Report Coverage
         uses: CodeIntelligenceTesting/github-actions/report-coverage@master
-        if: ${{ success() || failure() }}
+        if: ${{ github.event_name == 'pull_request' && (success() || failure()) }}
         with:
           cognito_user: ${{ secrets.COGNITO_USER }}
           cognito_password: ${{ secrets.COGNITO_PASSWORD }}
