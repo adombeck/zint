@@ -20,8 +20,8 @@ jobs:
           cognito_user: ${{ secrets.COGNITO_USER }}
           cognito_password: ${{ secrets.COGNITO_PASSWORD }}
           project: ${{ env.PROJECT_NAME }}
+          test_collection: "ean_fuzzer"
           git_reference: ${{ github.sha }}
-          test_collection: "ean_fuzzer"          
       - id: monitor-fuzzing
         name: Monitor Fuzzing
         uses: CodeIntelligenceTesting/github-actions/monitor-fuzzing@master
