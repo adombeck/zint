@@ -1,0 +1,15 @@
+{
+  "name": "test_fuzzer-12344321",
+  "displayName": "ean_fuzzer",
+  "maxRunTime": "1800s",
+  "fuzzTargets": [
+    "test_fuzzer-12121212"
+  ],
+  "fuzzerRunConfigurations": [
+    {
+      "engine": "LIBFUZZER",
+      "sanitizer": "ADDRESS",
+      "numberOfJobs": 1
+    }
+  ]
+}

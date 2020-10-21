@@ -1,0 +1,19 @@
+{
+  "name": "test_fuzzer-12121212",
+  "displayName": "ean_fuzzer",
+  "path": "ean_fuzzer.cpp",
+  "buildFlags": [
+    "-Ibuild/backend",
+    "-Ibackend",
+    "-lpng",
+    "-lz",
+    "-lm",
+    "-lzint",
+    "-Lbuild/backend"
+  ],
+  "cApi": {
+    "api": {
+      "relativePath": ".code-intelligence/fuzz_targets/test_fuzzer.cpp"
+    }
+  }
+}
