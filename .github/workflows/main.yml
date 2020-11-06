@@ -17,17 +17,16 @@ jobs:
         name: Build and Instrument
         uses: CodeIntelligenceTesting/github-actions/start-fuzzing@master
         with:
-          cognito_user: ${{ secrets.COGNITO_USER }}
-          cognito_password: ${{ secrets.COGNITO_PASSWORD }}
+          ci_fuzz_api_token: ${{ secrets.CI_FUZZ_API_TOKEN }}
           project: ${{ env.PROJECT_NAME }}
           test_collection: "ean_fuzzer"
           git_reference: ${{ github.sha }}          
+          fuzzing_server_address: grpc-api.demo.code-intelligence.com:443
       - id: monitor-fuzzing
         name: Fuzzing
         uses: CodeIntelligenceTesting/github-actions/monitor-fuzzing@master
         with:
-          cognito_user: ${{ secrets.COGNITO_USER }}
-          cognito_password: ${{ secrets.COGNITO_PASSWORD }}
+          ci_fuzz_api_token: ${{ secrets.CI_FUZZ_API_TOKEN }}
           project: ${{ env.PROJECT_NAME }}
           test_collection_run: ${{ steps.start-fuzzing.outputs.test_collection_run }}
           github_token: ${{ secrets.GITHUB_TOKEN }}
@@ -35,13 +34,14 @@ jobs:
           owner: ${{ github.event.repository.owner.login }}
           repository: ${{ github.event.repository.name }}
           timeout: 60
+          fuzzing_server_address: grpc-api.demo.code-intelligence.com:443
+          dashboard_address: https://app.demo.code-intelligence.com
       - id: report-coverage
         name: Report Coverage
         uses: CodeIntelligenceTesting/github-actions/report-coverage@master
         if: ${{ github.event_name == 'pull_request' && (success() || failure()) }}
         with:
-          cognito_user: ${{ secrets.COGNITO_USER }}
-          cognito_password: ${{ secrets.COGNITO_PASSWORD }}
+          ci_fuzz_api_token: ${{ secrets.CI_FUZZ_API_TOKEN }}
           project: ${{ env.PROJECT_NAME }}
           test_collection: "ean_fuzzer"
           github_token: ${{ secrets.GITHUB_TOKEN }}
@@ -49,4 +49,5 @@ jobs:
           owner: ${{ github.event.repository.owner.login }}
           repository: ${{ github.event.repository.name }}
           git_reference: ${{ github.sha }}
-          
+          fuzzing_server_address: grpc-api.demo.code-intelligence.com:443          
+          dashboard_address: https://app.demo.code-intelligence.com
