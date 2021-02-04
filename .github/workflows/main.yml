@@ -7,7 +7,9 @@ on:
     branches: [ refactor-cictl ]
 
 env:
-  PROJECT_NAME: zint  
+  PROJECT_NAME: zint
+  GRPC_URL: grpc-api.dev.code-intelligence.com:443
+  APP_URL: https://app.dev.code-intelligence.com
 
 jobs:
   fuzz_ean_fuzzer:
@@ -21,7 +23,7 @@ jobs:
           project: ${{ env.PROJECT_NAME }}
           test_collection: "projects/zint-a3712029fa824b11/campaigns/ean_fuzzer-f5b69279"
           git_reference: ${{ github.sha }}          
-          fuzzing_server_address: grpc-api.demo.code-intelligence.com:443
+          fuzzing_server_address: ${{ env.GRPC_URL }}
       - id: monitor-fuzzing
         name: Fuzzing
         uses: CodeIntelligenceTesting/github-actions/monitor-fuzzing@refactor-cictl
@@ -34,8 +36,8 @@ jobs:
           owner: ${{ github.event.repository.owner.login }}
           repository: ${{ github.event.repository.name }}
           timeout: 60
-          fuzzing_server_address: grpc-api.demo.code-intelligence.com:443
-          dashboard_address: https://app.demo.code-intelligence.com
+          fuzzing_server_address: ${{ env.GRPC_URL }}
+          dashboard_address: ${{ env.APP_URL }}
       - id: report-coverage
         name: Report Coverage
         uses: CodeIntelligenceTesting/github-actions/report-coverage@refactor-cictl
@@ -49,5 +51,5 @@ jobs:
           owner: ${{ github.event.repository.owner.login }}
           repository: ${{ github.event.repository.name }}
           git_reference: ${{ github.sha }}
-          fuzzing_server_address: grpc-api.demo.code-intelligence.com:443          
-          dashboard_address: https://app.demo.code-intelligence.com
+          fuzzing_server_address: ${{ env.GRPC_URL }}
+          dashboard_address: ${{ env.APP_URL }}
