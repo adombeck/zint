@@ -1,4 +1,4 @@
-name: CI
+name: Code Intelligence Fuzzing
 
 on:
   push:
@@ -7,9 +7,8 @@ on:
     branches: [ refactor-cictl ]
 
 env:
-  PROJECT_NAME: zint
-  GRPC_URL: grpc-api.dev.code-intelligence.com:443
-  APP_URL: https://app.dev.code-intelligence.com
+  FUZZING_SERVER_ADDRESS: grpc-api.dev.code-intelligence.com:443
+  DASHBOARD_ADDRESS: https://app.dev.code-intelligence.com
 
 jobs:
   fuzz_ean_fuzzer:
@@ -20,36 +19,33 @@ jobs:
         uses: CodeIntelligenceTesting/github-actions/start-fuzzing@refactor-cictl
         with:
           ci_fuzz_api_token: ${{ secrets.CI_FUZZ_DEV_API_TOKEN }}
-          project: ${{ env.PROJECT_NAME }}
           test_collection: "projects/zint-a3712029fa824b11/campaigns/ean_fuzzer-f5b69279"
-          git_reference: ${{ github.sha }}          
-          fuzzing_server_address: ${{ env.GRPC_URL }}
+          git_reference: ${{ github.sha }}
+          fuzzing_server_address: ${{ env.FUZZING_SERVER_ADDRESS }}
       - id: monitor-fuzzing
         name: Fuzzing
         uses: CodeIntelligenceTesting/github-actions/monitor-fuzzing@refactor-cictl
         with:
           ci_fuzz_api_token: ${{ secrets.CI_FUZZ_DEV_API_TOKEN }}
-          project: ${{ env.PROJECT_NAME }}
           test_collection_run: ${{ steps.start-fuzzing.outputs.test_collection_run }}
           github_token: ${{ secrets.GITHUB_TOKEN }}
           pull_request_number: ${{ github.event.pull_request.number }}
           owner: ${{ github.event.repository.owner.login }}
           repository: ${{ github.event.repository.name }}
-          timeout: 60
-          fuzzing_server_address: ${{ env.GRPC_URL }}
-          dashboard_address: ${{ env.APP_URL }}
+          fuzzing_server_address: ${{ env.FUZZING_SERVER_ADDRESS }}
+          dashboard_address: ${{ env.DASHBOARD_ADDRESS }}
       - id: report-coverage
         name: Report Coverage
         uses: CodeIntelligenceTesting/github-actions/report-coverage@refactor-cictl
         if: ${{ github.event_name == 'pull_request' && (success() || failure()) }}
         with:
           ci_fuzz_api_token: ${{ secrets.CI_FUZZ_DEV_API_TOKEN }}
-          project: ${{ env.PROJECT_NAME }}
           test_collection_run: ${{ steps.start-fuzzing.outputs.test_collection_run }}
           github_token: ${{ secrets.GITHUB_TOKEN }}
           pull_request_number: ${{ github.event.pull_request.number }}
           owner: ${{ github.event.repository.owner.login }}
           repository: ${{ github.event.repository.name }}
           git_reference: ${{ github.sha }}
-          fuzzing_server_address: ${{ env.GRPC_URL }}
-          dashboard_address: ${{ env.APP_URL }}
+          fuzzing_server_address: ${{ env.FUZZING_SERVER_ADDRESS }}
+          dashboard_address: ${{ env.DASHBOARD_ADDRESS }}
+          
