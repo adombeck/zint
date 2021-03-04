@@ -1,0 +1,45 @@
+## The name of this fuzz test. If unspecified, the filename of the
+## source file is used. Note that when this name is changed,
+## information about previous test runs can't be associated with this
+## fuzz test anymore.
+# name:
+
+## The fuzz test type. If unspecified, the type is deduced from the
+## extension of the fuzz test source file.
+# type: "c++"
+
+## If set to true, the fuzz target will not be built separately,
+## but is expected to be built (with the desired sanitizer flags)
+## by the project build script.
+# skip_build: false
+
+## Additional arguments to pass to the compiler during build
+compiler_extra_args:
+  - "-Ibuild/backend"
+  - "-Ibackend"
+  - "-lpng"
+  - "-lz"
+  - "-lm"
+  - "-lzint"
+  - "-Lbuild/backend"
+
+## Additional arguments to pass to the fuzz test when it is executed
+# run_extra_args:
+
+##### This section is only for Java fuzz tests #####
+
+## Package filters to apply when instrumenting the source code.
+# instrumentation_filters:
+
+##### This section is only for socket fuzz tests #####
+
+## The port used by the fuzz test
+# port:
+
+## The transport protocol used by the fuzz test. By default, TCP is
+## used.
+# protocol: TCP
+
+## The application protocol used by the fuzz test. By default, no
+## application protocol is used.
+# application_protocol:
