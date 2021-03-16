@@ -3,7 +3,7 @@
   "displayName": "ean_fuzzer",
   "maxRunTime": "1800s",
   "fuzzTargets": [
-    "ean_fuzzer-64014948"
+    "LmNvZGUtaW50ZWxsaWdlbmNlL2Z1enpfdGFyZ2V0cy9lYW5fZnV6emVyLmNwcA=="
   ],
   "fuzzerRunConfigurations": [
     {
