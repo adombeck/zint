@@ -14,7 +14,7 @@ pipeline {
         CI_FUZZ_API_TOKEN = credentials('CI_FUZZ_API_TOKEN')
         CICTL = "${WORKSPACE}/cictl-3.2.2-linux";
         CICTL_VERSION = '3.2.2';
-        CICTL_SHA256SUM = '';
+        CICTL_SHA256SUM = '1638c7426af10dccc60da00fa70c6c42fb7b8cea59ee926a64568784b61926d3';
         CICTL_URL = 'https://s3.eu-central-1.amazonaws.com/public.code-intelligence.com/cictl/cictl-3.2.2-linux';
         FINDINGS_TYPE = 'CRASH';
         TIMEOUT = '900'
