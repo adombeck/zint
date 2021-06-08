@@ -11,7 +11,7 @@ pipeline {
         WEB_APP_ADDRESS =  'https://test1.code-intelligence.com'
 
         // Credentials for accessing the fuzzing service
-        CI_FUZZ_API_TOKEN = credentials('CI_FUZZ_API_TOKEN')
+        CI_FUZZ_API_TOKEN = credentials('CI_FUZZ_API_TOKEN_ADRIAN_TEST1')
         CICTL = "${WORKSPACE}/cictl-3.2.2-linux";
         CICTL_VERSION = '3.2.2';
         CICTL_SHA256SUM = '1638c7426af10dccc60da00fa70c6c42fb7b8cea59ee926a64568784b61926d3';
